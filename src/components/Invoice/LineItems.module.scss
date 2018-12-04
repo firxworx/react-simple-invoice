@@ -1,0 +1,87 @@
+@import 'Invoice';
+
+.lineItems {
+  margin-bottom: $rhythm * 4;
+  .addItem {
+    padding-top: $rhythm;
+    button {
+      @extend %flex-center;
+      background: none;
+      padding: $rhythm / 2;
+      border: 1px solid $addColor;
+      color: $addColor;
+      border-radius: $borderRadius;
+      float: right;
+      .addIcon {
+        color: $addColor;
+        margin-right: $rhythm / 4;
+      }
+    }
+  }
+}
+
+.gridTable {
+  margin: 0 auto;
+  border: 1px solid $tableBorderColor;
+  border-radius: $borderRadius;
+  overflow: hidden;
+  display: grid;
+  & > .row {
+    display: grid;
+    grid-template-columns: 1fr repeat(2, 5fr) 2fr repeat(2, 3fr) 2fr; //repeat(7, 1fr);
+    border-bottom: 1px solid $tableBorderColor;
+    &:last-of-type {
+      border-bottom: none;
+    }
+    &.header > div {
+      text-align: center;
+      font-weight: bold;
+      background: $boxBgColor;
+    }
+    &.editable > div {
+      padding: $rhythm / 2;
+    }
+    & > div {
+      @extend %flex-center;
+      padding: ($rhythm/2);
+      border-left: 1px solid $tableBorderColor;
+      width: 100%;
+      line-height: $rhythm;
+      min-width: $rhythm;
+      &:first-of-type {
+        padding: ($rhythm/2) 0;
+        border-left: none;
+      }
+      &:last-of-type {
+        padding: ($rhythm/2) 0;
+      }
+      &:first-of-type, &:nth-child(4), &:last-of-type {
+        text-align: center;
+      }
+      & > .deleteItem {
+        @extend %flex-center;
+        color: $removeColor;
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+    }
+  }
+  .currency > input[type=number] {
+    max-width: $rhythm * 4;
+  }
+
+}
+
+.listDraggingOver {
+  background: #ddd;
+  background-image: repeating-linear-gradient(30deg, rgba(#FFF, .2), rgba(#FFF, .2) 30px, transparent 0, transparent 60px);
+}
+
+.listItemDragging {
+  background: #f9fff9;
+  border: 1px solid $tableBorderColor;
+}
+
+
