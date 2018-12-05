@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { MdAddCircle as AddIcon, MdCancel as DeleteIcon } from 'react-icons/md'
 import styles from './Invoice.module.scss'
+
+import LineItems from './LineItems'
+
+import uuidv4 from 'uuid/v4'
 
 class Invoice extends Component {
 
@@ -11,6 +14,7 @@ class Invoice extends Component {
     taxRate: 0.00,
     lineItems: [
       {
+        id: 'initial',      // react-beautiful-dnd unique key
         name: '',
         description: '',
         quantity: 0,
@@ -24,24 +28,20 @@ class Invoice extends Component {
   }
 
   handleLineItemChange = (elementIndex) => (event) => {
-
     let lineItems = this.state.lineItems.map((item, i) => {
       if (elementIndex !== i) return item
       return {...item, [event.target.name]: event.target.value}
     })
-
     this.setState({lineItems})
-
   }
 
   handleAddLineItem = (event) => {
-
     this.setState({
+      // use optimistic uuid for drag drop; in a production app this could be a database id
       lineItems: this.state.lineItems.concat(
-        [{ name: '', description: '', quantity: 0, price: 0.00 }]
+        [{ id: uuidv4(), name: '', description: '', quantity: 0, price: 0.00 }]
       )
     })
-
   }
 
   handleRemoveLineItem = (elementIndex) => (event) => {
@@ -49,6 +49,12 @@ class Invoice extends Component {
       lineItems: this.state.lineItems.filter((item, i) => {
         return elementIndex !== i
       })
+    })
+  }
+
+  handleReorderLineItems = (newLineItems) => {
+    this.setState({
+      lineItems: newLineItems,
     })
   }
 
@@ -113,38 +119,16 @@ class Invoice extends Component {
           </div>
         </div>
         <h2>Invoice</h2>
-        <form>
-            <div className={styles.lineItems}>
-              <div className={`${styles.gridTable}`}>
-                <div className={`${styles.row} ${styles.header}`}>
-                  <div>#</div>
-                  <div>Item</div>
-                  <div>Description</div>
-                  <div>Qty</div>
-                  <div>Price</div>
-                  <div>Total</div>
-                  <div></div>
-                </div>
-                {this.state.lineItems.map((item, i) => (
-                  <div className={`${styles.row} ${styles.editable}`} key={i}>
-                    <div>{i+1}</div>
-                    <div><input name="name" type="text" value={item.name} onChange={this.handleLineItemChange(i)} /></div>
-                    <div><input name="description" type="text" value={item.description} onChange={this.handleLineItemChange(i)} /></div>
-                    <div><input name="quantity" type="number" step="1" value={item.quantity} onChange={this.handleLineItemChange(i)} onFocus={this.handleFocusSelect} /></div>
-                    <div className={styles.currency}><input name="price" type="number" step="0.01" min="0.00" max="9999999.99" value={item.price} onChange={this.handleLineItemChange(i)} onFocus={this.handleFocusSelect} /></div>
-                    <div className={styles.currency}>{this.formatCurrency( item.quantity * item.price )}</div>
-                    <div>
-                      <button type="button"
-                        className={styles.deleteItem}
-                        onClick={this.handleRemoveLineItem(i)}
-                      ><DeleteIcon size="1.25em" /></button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className={styles.addItem}><button type="button" onClick={this.handleAddLineItem}><AddIcon size="1.25em" className={styles.addIcon} /> Add Item</button></div>
-            </div>
-        </form>
+
+          <LineItems
+            items={this.state.lineItems}
+            currencyFormatter={this.formatCurrency}
+            addHandler={this.handleAddLineItem}
+            changeHandler={this.handleLineItemChange}
+            focusHandler={this.handleFocusSelect}
+            deleteHandler={this.handleRemoveLineItem}
+            reorderHandler={this.handleReorderLineItems}
+          />
 
         <div className={styles.totalContainer}>
           <form>
@@ -180,7 +164,7 @@ class Invoice extends Component {
         <div className={styles.footer}>
           <div className={styles.comments}>
             <h4>Notes</h4>
-            <div>By Kevin Firko, consulting developer at <a href="https://bitcurve.com">Bitcurve Systems</a>. Check out my blog: <a href="https://firxworx.com">https://firxworx.com</a>. Available for hire!</div>
+            <div>By Kevin Firko, consulting developer at <a href="https://bitcurve.com">Bitcurve Systems</a>. Check out my blog: <a href="https://firxworx.com">https://firxworx.com</a>.</div>
           </div>
           <div className={styles.closing}>
             <div>Thank-you for your business</div>

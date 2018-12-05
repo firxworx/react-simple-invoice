@@ -1,0 +1,47 @@
+@import 'Invoice';
+
+.lineItem {
+
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 5fr) 2fr repeat(2, 3fr) 2fr;
+
+  & > div {
+    @extend %flex-center;
+    padding: ($rhythm/2);
+    border-left: 1px solid $tableBorderColor;
+    width: 100%;
+    line-height: $rhythm;
+    min-width: $rhythm;
+    &:first-of-type {
+      padding: ($rhythm/2) 0;
+      border-left: none;
+    }
+    &:last-of-type {
+      padding: ($rhythm/2) 0;
+    }
+    &:first-of-type, &:nth-child(4), &:last-of-type {
+      text-align: center;
+    }
+  }
+
+}
+
+.deleteItem {
+  @extend %flex-center;
+  color: $removeColor;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+input, input[type=number] {
+  padding: $rhythm / 4;
+  border: 1px dotted lighten($tableBorderColor, 2%);
+  border-radius: $borderRadius;
+  min-width: $rhythm * 2;
+  width: 100%;
+}
+input[type=number] {
+  text-align: center;
+}

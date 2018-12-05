@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.module.scss'
-import Invoice from './Invoice'
+import Invoice from './Invoice/Invoice'
 
 class App extends Component {
   render() {
