@@ -18,15 +18,11 @@ The project was bootstrapped with [Create React App](https://github.com/facebook
 
 Preview (cropped):
 
-<p align="center">
 ![Screenshot](images/screenshot-800.png)
-</p>
 
 Drag and Drop:
 
-<p align="center">
-![Drag-and-Drop](images/screenshot-dnd-800.png)
-</p>
+![Drag and Drop](images/screenshot-dnd-800.png)
 
 ## Scripts
 
