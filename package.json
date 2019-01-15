@@ -1,6 +1,7 @@
 {
   "name": "react-simple-invoice-dev",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "homepage": "https://http://demo.firxworx.com/react-simple-invoice/",
   "private": true,
   "dependencies": {
     "node-sass": "^4.10.0",
@@ -16,7 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "react-scripts build && dev/deploy.sh"
   },
   "eslintConfig": {
     "extends": "react-app"

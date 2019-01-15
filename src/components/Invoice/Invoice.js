@@ -62,6 +62,10 @@ class Invoice extends Component {
     event.target.select()
   }
 
+  handlePayButtonClick = () => {
+    alert('Not implemented')
+  }
+
   formatCurrency = (amount) => {
     return (new Intl.NumberFormat(this.locale, {
       style: 'currency',
@@ -158,13 +162,15 @@ class Invoice extends Component {
         </div>
 
         <div className={styles.pay}>
-          <button className={styles.payNow}>Pay Now</button>
+          <button className={styles.payNow} onClick={this.handlePayButtonClick}>Pay Now</button>
         </div>
 
         <div className={styles.footer}>
           <div className={styles.comments}>
             <h4>Notes</h4>
-            <div>By Kevin Firko, consulting developer at <a href="https://bitcurve.com">Bitcurve Systems</a>. Check out my blog: <a href="https://firxworx.com">https://firxworx.com</a>.</div>
+            <p>Demo by Kevin Firko, independent consulting developer at <a href="https://bitcurve.com">Bitcurve</a>.</p>
+            <p>Check out my blog <a href="https://firxworx.com">https://firxworx.com</a> and <a href="https://firxworx.com/blog/coding/creating-an-invoice-component-with-dynamic-line-items-using-react/">the related post</a> covering how to create a dynamic Invoice component in React. </p>
+            <p>Find the <a href="https://github.com/firxworx/react-simple-invoice">code on Github</a>.</p>
           </div>
           <div className={styles.closing}>
             <div>Thank-you for your business</div>

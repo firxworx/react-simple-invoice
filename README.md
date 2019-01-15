@@ -4,6 +4,8 @@ An example of an Invoice component built with React that enables users to create
 
 Totals are updated automatically as the user types values into the form fields.
 
+Live Demo: <http://demo.firxworx.com/react-simple-invoice/>
+
 Features:
 
 * Drag-and-drop reordering of invoice line items implemented with `react-beautiful-dnd`
