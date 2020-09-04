@@ -4,7 +4,7 @@
   "homepage": "https://http://demo.firxworx.com/react-simple-invoice/",
   "private": true,
   "dependencies": {
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-beautiful-dnd": "^11.0.4",
